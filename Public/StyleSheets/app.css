@@ -1,0 +1,1 @@
+*{box-sizing:border-box;padding:0;margin:0}.overview{border:1px solid #000;display:flex;justify-content:space-evenly;padding-block:2rem}.overview .circles{background:#fff;width:150px;aspect-ratio:1/1;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid red}
