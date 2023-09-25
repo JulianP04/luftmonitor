@@ -2,6 +2,8 @@
 
 include 'db.php';
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 class handleRequest extends dbConnection {
 
     private $conn = NULL;
@@ -27,7 +29,8 @@ class handleRequest extends dbConnection {
     }
 }
 
-function instantiate () {
-    $instance = new handleRequest();
+$instance = new handleRequest();
+
+if($_POST['action']=='request') {
     $instance->queryCurrentValues();
 }
