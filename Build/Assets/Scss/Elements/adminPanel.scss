@@ -1,0 +1,27 @@
+.adminPanel {
+    width: 100%;
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 3px;
+
+    p {
+        display: inline-block;
+        color: $text;
+        font-size: 9px;
+        text-align: end;
+        margin-right: 5px;
+    }
+
+    button {
+        background-color: $primary;
+        border: none;
+        padding: 0.25rem;
+        border-radius: 3px;
+        cursor: pointer;
+
+        &:hover {
+            color: $white;
+        }
+    }
+}

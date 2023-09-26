@@ -9,17 +9,44 @@
     <script defer src="Public/JavaScripts/app.js"></script>
 </head>
 <body>
-    <button type="button" id="reloadBtn">Reload</button>
+    <div class="adminPanel">
+        <p>
+            Raumluftqualitätsmonitor - Webpanel<br>
+            Version. 1.0.1<br>
+            Julian Pohl, Timo Dierich
+        </p>
+        <button type="button" title="Power off" id="powerBtn">
+            <i class="fa-solid fa-power-off"></i>
+        </button>
+        <button type="button" title="Refresh page" id="reloadBtn">
+            <i class="fa-solid fa-rotate-right"></i>
+        </button>
+    </div>
+    
     <div class="overview">
-        <div class="temp-circle circles">
-            <span>---</span>
+        <div class="temp-info">
+            <div class="temp-circle circles">
+                <span>---</span>
+            </div>
+            <p class="description">Temperatur</p>
         </div>
-        <div class="humidity-circle circles">
-            <span>---</span>
+        <div class="humidity-info">
+            <div class="humidity-circle circles">
+                <span>---</span>
+            </div>
+            <p class="description">Luftfeuchtigkeit</p>
         </div>
-        <div class="gas-circle circles">
-            <span>---</span>
+        <div class="gas-info">
+            <div class="gas-circle circles">
+                <span>---</span>
+            </div>
+            <p class="description">Kohlenstoff</p>
         </div>
+    </div>
+
+    <div class="histogram">
+        <h2>Temperaturverlauf</h2>
+        <canvas width="900" height="500" id="temp-history" class="histogram-canvas"></canvas>
     </div>
 </body>
 </html>

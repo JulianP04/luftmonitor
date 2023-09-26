@@ -1,3 +1,6 @@
+import '@fortawesome/fontawesome-free/js/all.min.js';
+import './modules/histograms';
+
 const baseURL = 'luftmonitor.ddev.site';
 
 const makeRequest = () => {
@@ -8,7 +11,13 @@ const makeRequest = () => {
         })
     })
     .then(response => response.text())
-    .then(data => console.log(data));
+    .then(data => {
+        if(data.includes("Connection failed")) { //database connection couldn't be established
+            alert("Zur Zeit kann keine Verbindung zum Webserver hergestellt werden.");
+        } else {
+            console.log(data);
+        }
+    });
 }
 
 //connect reload btn to request handler

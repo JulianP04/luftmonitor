@@ -1,0 +1,29 @@
+.overview {
+    background: $tertiary;
+    display: flex;
+    justify-content: space-evenly;
+    padding-block: 2rem;
+    width: 66%;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 2rem;
+
+    .description {
+        color: $text;
+        text-align: center;
+        margin-top: 0.5rem;
+        font-size: 12px;
+    }
+
+    .circles {
+        width: 150px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid $primary;
+        color: $primary;
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,15 @@
+.histogram {
+    background: $tertiary;
+    padding: 2rem;
+    width: 66%;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 2rem;
+    color: $text;
+
+    .histogram-canvas {
+        width: 100%;
+        aspect-ratio: 16/9;
+        margin-top: 1rem;
+    }
+}
