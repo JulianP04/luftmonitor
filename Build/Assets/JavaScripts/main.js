@@ -1,10 +1,10 @@
 import '@fortawesome/fontawesome-free/js/all.min.js';
 import './modules/histograms';
 
-const baseURL = 'luftmonitor.ddev.site';
+const baseURL = 'http://172.16.129.103/Luftmonitor/';
 
 const makeRequest = () => {
-    fetch(`https://${baseURL}/Middleware/handler.php`, {
+    fetch(`${baseURL}/Middleware/handler.php`, {
         method: 'POST',
         body: JSON.stringify({
             action: 'request',

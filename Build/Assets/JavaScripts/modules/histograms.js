@@ -16,7 +16,7 @@ const example_dump = [
 const strokeColor = "lightgray";
 const strokeWidth = 3;
 
-const stepSize = 3;
+const stepSize = 2;
 
 class Histogram {
     constructor(obj) {
