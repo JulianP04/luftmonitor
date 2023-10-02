@@ -4,7 +4,7 @@ include 'db.php';
 
 $_POST = json_decode(file_get_contents('php://input'), true);
 
-class handleRequest extends dbConnection {
+class handleRequest {
 
     private $conn = NULL;
 
