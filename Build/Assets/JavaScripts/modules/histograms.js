@@ -4,7 +4,7 @@ const example_dump = [
         "date": "2023-09-27 12:19:39",
     },
     {
-        "temperature": 23,
+        "temperature": 43,
         "date": "2023-09-27 12:24:39",
     },
     {
@@ -14,6 +14,10 @@ const example_dump = [
     {
         "temperature": 24,
         "date": "2023-09-27 12:34:39",
+    },
+    {
+        "temperature": 24,
+        "date": "2023-09-27 12:39:39",
     },
 ];
 
@@ -201,7 +205,7 @@ class Histogram {
         const rectHeight = 100;
 
         this.textboxRect = {
-            "x": bar.xMin,
+            "x": (bar.xMin - rectWidth / 2 + this.barWidth / 2),
             "y": (bar.yMin - rectHeight - 20),
             "width": (rectWidth + 10),
             "height": rectHeight,
@@ -240,7 +244,7 @@ class Histogram {
             } else {
                 if(bar.hovered) {
                     this.ctx.fillStyle = "#212121";
-                    this.ctx.fillRect(this.textboxRect.x, this.textboxRect.y, this.textboxRect.width, this.textboxRect.height);
+                    this.ctx.fillRect((this.textboxRect.x - 1), (this.textboxRect.y - 1), (this.textboxRect.width + 2), (this.textboxRect.height + 2));
                     this.ySteps.forEach(step => {
                         this.drawLine(this.xRenderStart, step.pos, this.width, step.pos, "gray");
                     });
