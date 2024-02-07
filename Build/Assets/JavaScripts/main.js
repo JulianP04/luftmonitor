@@ -1,5 +1,6 @@
 import '@fortawesome/fontawesome-free/js/all.min.js';
 import './modules/histograms';
+import './modules/middleware';
 
 const baseURL = 'http://172.16.129.103/Luftmonitor/';
 

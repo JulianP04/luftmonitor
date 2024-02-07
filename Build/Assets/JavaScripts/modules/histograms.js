@@ -1,30 +1,11 @@
-const example_dump = [
-    {
-        "temperature": 19,
-        "date": "2023-09-27 12:19:39",
-    },
-    {
-        "temperature": 43,
-        "date": "2023-09-27 12:24:39",
-    },
-    {
-        "temperature": 18,
-        "date": "2023-09-27 12:29:39",
-    },
-    {
-        "temperature": 24,
-        "date": "2023-09-27 12:34:39",
-    },
-    {
-        "temperature": 24,
-        "date": "2023-09-27 12:39:39",
-    },
-];
+import middleware from "./middleware";
 
 const strokeColor = "lightgray";
 const strokeWidth = 3;
 
 const stepSize = 2;
+
+const limitSelect = document.querySelector(".limit__selector");
 
 class Histogram {
     constructor(obj) {
@@ -269,4 +250,10 @@ canvasObjs.forEach(canvas => {
     canvas.addEventListener("mousemove", cur_obj.mouseHandler);
 });
 
-histograms[0].compileCanvasData(example_dump);
+limitSelect.addEventListener("change", async () => {
+    const middlewareData = await middleware(limitSelect.value);
+    histograms[0].compileCanvasData(middlewareData);
+});
+
+const middlewareData = await middleware();
+histograms[0].compileCanvasData(middlewareData);
