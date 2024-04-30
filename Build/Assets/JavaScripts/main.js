@@ -23,4 +23,6 @@ const makeRequest = () => {
 
 //connect reload btn to request handler
 const reloadBtn = document.querySelector("#reloadBtn");
-reloadBtn.addEventListener('click', makeRequest);
+reloadBtn.addEventListener('click', () => {
+    window.location.reload();
+});

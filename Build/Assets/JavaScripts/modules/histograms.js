@@ -28,13 +28,17 @@ class Histogram {
 
             this.ctx.font = "10px Arial";
             this.ctx.fillStyle = "white";
-    
-            //axes
-            this.drawLine(this.xRenderStart, 0, this.xRenderStart, this.yRenderStop);
-            this.drawLine(this.xRenderStart, this.yRenderStop, this.width, this.yRenderStop);
         } else {
             console.log("canvas rendering not supported :(");
         } 
+    }
+
+    resetCanvas = () => {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        //draw axes
+        this.drawLine(this.xRenderStart, 0, this.xRenderStart, this.yRenderStop);
+        this.drawLine(this.xRenderStart, this.yRenderStop, this.width, this.yRenderStop);
     }
 
     drawLine = (x1,y1,x2,y2,color) => {
@@ -105,6 +109,9 @@ class Histogram {
     }
 
     compileCanvasData = (data_dump) => {
+        //reset canvas for drawing
+        this.resetCanvas();
+
         this.ySteps = [];
 
         const data_array = [];
