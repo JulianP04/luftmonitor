@@ -14,32 +14,36 @@ const middleware = async (limit = 5) => {
     const dumpData = async (limit) => {
         const response = await fetchMiddleware(limit);
     
-        let tempData = [];
-        let humidityData = [];
-        let gasData = [];
+        const dataset = {
+            tempData: [],
+            humidityData: [],
+            gasData: [],
+            co2Data: []
+        };
+
         response.forEach(element => {
-            const tempDataset = {
-                temperature: parseFloat(element.temperature),
+            dataset.tempData.push({
+                value: parseFloat(element.temperature),
                 date: element.date
-            };
-            const humidityDataset = {
-                humidity: parseFloat(element.humidity),
+            });
+            dataset.humidityData.push({
+                value: parseFloat(element.humidity),
                 date: element.date
-            };
-            const gasDataset = {
-                gas: parseFloat(element.gas),
+            });
+            dataset.gasData.push({
+                value: parseFloat(element.gas),
                 date: element.date
-            };
-            tempData.push(tempDataset);
-            humidityData.push(humidityDataset);
-            humidityData.push(humidityDataset);
-            gasData.push(gasDataset);
+            });
+            dataset.co2Data.push({
+                value: parseFloat(element.co2),
+                date: element.date
+            });
         });
         
-        return tempData;
+        return dataset;
     }   
     
     return dumpData(limit);
 }
 
-export default middleware;
+export {middleware};

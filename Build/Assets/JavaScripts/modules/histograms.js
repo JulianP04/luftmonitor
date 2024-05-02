@@ -1,16 +1,11 @@
-import middleware from "./middleware";
-
-const strokeColor = "lightgray";
-const strokeWidth = 3;
-
-const stepSize = 2;
-
-const limitSelect = document.querySelector(".limit__selector");
-
 class Histogram {
-    constructor(obj) {
+    constructor(obj, data) {
         this.width = obj.width;
         this.height = obj.height;
+
+        this.stepSize = 2;
+        this.strokeWidth = 3;
+        this.strokeColor = "lightgray";
 
         if(obj.getContext) {
             const ctx = obj.getContext('2d');
@@ -31,6 +26,10 @@ class Histogram {
         } else {
             console.log("canvas rendering not supported :(");
         } 
+
+        if(data) {
+            this.compileCanvasData(data);
+        }
     }
 
     resetCanvas = () => {
@@ -45,8 +44,8 @@ class Histogram {
         this.ctx.beginPath();
         this.ctx.moveTo(x1, y1);
         this.ctx.lineTo(x2, y2);
-        this.ctx.strokeStyle = color || strokeColor;
-        this.ctx.lineWidth = strokeWidth;
+        this.ctx.strokeStyle = color || this.strokeColor;
+        this.ctx.lineWidth = this.strokeWidth;
         this.ctx.stroke();
     }
 
@@ -84,7 +83,7 @@ class Histogram {
             if(this.data[value]<step.data&&yPos==null) {
                 yPos = step.pos;
 
-                let step_diff = (step.data - this.data[value]) / stepSize;
+                let step_diff = (step.data - this.data[value]) / this.stepSize;
                 step_diff = this.yGap * step_diff;
                 yPos += step_diff;
             }
@@ -109,13 +108,17 @@ class Histogram {
     }
 
     compileCanvasData = (data_dump) => {
+        if(!data_dump) {
+            return;
+        }
+
         //reset canvas for drawing
         this.resetCanvas();
 
         this.ySteps = [];
 
         const data_array = [];
-        data_dump.forEach(data => data_array.push(data.temperature.toFixed(2)));
+        data_dump.forEach(data => data_array.push(data.value.toFixed(2)));
         const data_min = Math.min.apply(Math, data_array);
         const data_max = Math.max.apply(Math, data_array);
 
@@ -129,7 +132,7 @@ class Histogram {
         const differences = [(data_max - average), (average - data_min)];
         const max_diff = Math.max.apply(Math, differences);
 
-        const stepDivider = Math.floor(max_diff / stepSize) + 1;
+        const stepDivider = Math.floor(max_diff / this.stepSize) + 1;
         const yStepsTotal = stepDivider * 2 + 1;
         
         this.yGap = this.yRenderStop / yStepsTotal;
@@ -137,7 +140,7 @@ class Histogram {
         for(let i = 0; i < yStepsTotal; i++) {
             let currentData;
             if(i==0) {
-                currentData = (average - (stepSize * (Math.floor(yStepsTotal/2) - i))).toFixed(2);
+                currentData = (average - (this.stepSize * (Math.floor(yStepsTotal/2) - i))).toFixed(2);
                 this.ySteps.push(
                     {
                         "pos": this.yRenderStop - this.yGap / 2,
@@ -146,9 +149,9 @@ class Histogram {
                 );
             } else {
                 if(i<(yStepsTotal / 2)) {
-                    currentData = average - (stepSize * (Math.floor(yStepsTotal/2) - i));
+                    currentData = average - (this.stepSize * (Math.floor(yStepsTotal/2) - i));
                 } else {
-                    currentData = average + (stepSize * (i - Math.floor(yStepsTotal/2)));
+                    currentData = average + (this.stepSize * (i - Math.floor(yStepsTotal/2)));
                 }
                 currentData = currentData.toFixed(2);
                 this.ySteps.push(
@@ -238,7 +241,7 @@ class Histogram {
                     });
                     this.barData.forEach(bar => {
                         this.drawBar(bar.xPos,(this.yRenderStop - 2),bar.xPos,bar.yMin,"#9400FF",false);
-                    })
+                    });
 
                     let xPos = bar.xMin + this.barWidth / 2;
                     this.drawBar(xPos,bar.yMax, xPos, (bar.yMin-2));
@@ -249,18 +252,4 @@ class Histogram {
     }
 }
 
-const canvasObjs = document.querySelectorAll(".histogram-canvas");
-const histograms = [];
-canvasObjs.forEach(canvas => {
-    let cur_obj = new Histogram(canvas);
-    histograms.push(cur_obj);
-    canvas.addEventListener("mousemove", cur_obj.mouseHandler);
-});
-
-limitSelect.addEventListener("change", async () => {
-    const middlewareData = await middleware(limitSelect.value);
-    histograms[0].compileCanvasData(middlewareData);
-});
-
-const middlewareData = await middleware();
-histograms[0].compileCanvasData(middlewareData);
+export {Histogram};

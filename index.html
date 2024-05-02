@@ -45,29 +45,28 @@
             </div>
         </div>
         <div class="current-info">
-            <h3>Letzte Messung:<span id="measurement-time"></span></h3>
+            <h3>Letzte Messung: <span id="measurement-time"></span></h3>
             <br>
-            <p>Temperatur:<span id="measurement-temp"></span></p>
-            <p>Luftfeuchtigkeit:<span id="measurement-humidity"></span></p>
-            <p>Luftqualität:<span id="measurement-quality"></span></p>
+            <p>Temperatur: <span id="measurement-temp"></span></p>
+            <p>Luftfeuchtigkeit: <span id="measurement-humidity"></span></p>
+            <p>Luftqualität: <span id="measurement-quality">Gut</span></p>
         </div>
     </div>
 
     <div class="histogram">
         <h2>Temperaturverlauf</h2>
-        <canvas width="1100" height="631" id="temp-history" class="histogram-canvas" data-y-extension="°C"></canvas>
+        <canvas width="1100" height="631" id="temp-history" class="histogram-canvas" data-y-extension="°C" data-type="temp"></canvas>
         <div class="histogram-options">
             <select class="limit__selector">
+                <option value="3">3 Datensätze</option>
                 <option selected value="5">5 Datensätze</option>
                 <option value="10">10 Datensätze</option>
-                <option value="20">20 Datensätze</option>
-                <option value="30">30 Datensätze</option>
             </select>
         </div>
     </div>
     <div class="histogram">
         <h2>Luftfeuchtigkeitsverlauf</h2>
-        <canvas width="900" height="500" id="temp-history" class="histogram-canvas"></canvas>
+        <canvas width="900" height="500" id="temp-history" class="histogram-canvas" data-type="humidity"></canvas>
     </div>
 </body>
 </html>
